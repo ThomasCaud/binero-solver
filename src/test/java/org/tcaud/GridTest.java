@@ -22,4 +22,111 @@ class GridTest {
             { 0, 1, 0 },
         }));
     }
+
+    @Test
+    void isValid_withValidGrid_returnTrue() {
+        var grid = new Grid(new int[][] {
+                { 0, 0, 1, 1 },
+                { 1, 1, 0, 0 },
+                { 0, 1, 0, 1 },
+                { 1, 0, 1, 0 }
+        });
+        assertTrue(grid.isValid());
+    }
+
+    @Test
+    void isValid_gridWithTooMuchOneInARow_returnFalse() {
+        var grid = new Grid(new int[][] {
+            { 0, 0, 1, 1 },
+            { 1, 1, 0, 1 },
+            { 0, 1, 0, 1 },
+            { 1, 0, 1, 0 }
+        });
+        assertFalse(grid.isValid());
+    }
+
+    @Test
+    void isValid_gridWithTooMuchZeroInARow_returnFalse() {
+        var grid = new Grid(new int[][] {
+                { 0, 0, 1, 1 },
+                { 1, 1, 0, 1 },
+                { 0, 0, 0, 1 },
+                { 1, 0, 1, 0 }
+        });
+        assertFalse(grid.isValid());
+    }
+
+    @Test
+    void isValid_gridWithTooMuchOneInAColumn_returnFalse() {
+        var grid = new Grid(new int[][] {
+                { 0, 0, 1, 1 },
+                { 1, 1, 0, 0 },
+                { 0, 1, 0, 1 },
+                { 1, -1, -1, 1 }
+        });
+        assertFalse(grid.isValid());
+    }
+
+    @Test
+    void isValid_gridWithTooMuchZeroInAColumn_returnFalse() {
+        var grid = new Grid(new int[][] {
+                { 0, 0, 1, 0 },
+                { 1, -1, 0, 1 },
+                { 0, -1, -1, 0 },
+                { 1, 0, 1, 0 }
+        });
+        assertFalse(grid.isValid());
+    }
+
+    @Test
+    void isValid_gridWithMoreThanTwoIdenticalValuesInARowInARow_returnFalse() {
+        var grid = new Grid(new int[][] {
+                {  0,  0,  0, -1, -1, -1 },
+                { -1, -1, -1, -1, -1, -1 },
+                { -1, -1, -1, -1, -1, -1 },
+                { -1, -1, -1, -1, -1, -1 },
+                { -1, -1, -1, -1, -1, -1 },
+                { -1, -1, -1, -1, -1, -1 }
+        });
+        assertFalse(grid.isValid());
+    }
+
+    @Test
+    void isValid_gridWithMoreThanTwoIdenticalValuesInARowInAColumn_returnFalse() {
+        var grid = new Grid(new int[][] {
+                { -1, -1, -1, -1, -1, -1 },
+                { -1, -1, -1, -1, -1, -1 },
+                { -1, 0,  -1, -1, -1, -1 },
+                { -1, 0,  -1, -1, -1, -1 },
+                { -1, 0,  -1, -1, -1, -1 },
+                { -1, -1, -1, -1, -1, -1 }
+        });
+        assertFalse(grid.isValid());
+    }
+
+    @Test
+    void isValid_twoIdenticalLines_returnFalse() {
+        var grid = new Grid(new int[][] {
+                { 1,  1,  0,  0,   1,  0 },
+                { 1,  1,  0,  0,   1,  0 },
+                { -1, -1, -1, -1, -1, -1 },
+                { -1, -1, -1, -1, -1, -1 },
+                { -1, -1, -1, -1, -1, -1 },
+                { -1, -1, -1, -1, -1, -1 }
+        });
+        assertFalse(grid.isValid());
+    }
+
+    @Test
+    void isValid_twoIdenticalColumns_returnFalse() {
+        var grid = new Grid(new int[][] {
+                { 0, 0, -1, -1, -1, -1 },
+                { 0, 0, -1, -1, -1, -1 },
+                { 1, 1, -1, -1, -1, -1 },
+                { 1, 1, -1, -1, -1, -1 },
+                { 0, 0, -1, -1, -1, -1 },
+                { 1, 1, -1, -1, -1, -1 }
+        });
+        assertFalse(grid.isValid());
+    }
 }
