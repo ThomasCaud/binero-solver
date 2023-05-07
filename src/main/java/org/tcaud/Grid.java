@@ -119,7 +119,7 @@ public class Grid {
     public void display() {
         for (int[] row : grid) {
             for (int cell : row) {
-                System.out.print(cell == -1 ? ". " : cell + " ");
+                System.out.print(cell == VALUE_EMPTY_CELL ? ". " : cell + " ");
             }
             System.out.println();
         }
@@ -135,6 +135,10 @@ public class Grid {
 
     public void updateCell(int row, int col, int value) {
         grid[row][col] = value;
+    }
+
+    public void reinitializeCell(int row, int col) {
+        grid[row][col] = VALUE_EMPTY_CELL;
     }
 
     public int[][] getGrid() {

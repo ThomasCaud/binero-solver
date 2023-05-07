@@ -27,14 +27,12 @@ public class Resolver {
         int[] possibleValues = {0, 1};
         for (int possibleValue : possibleValues) {
             grid.updateCell(row, col, possibleValue);
-            if (grid.isValid()) {
-                if (resolve(grid, rowNextCell, colNextCell)) {
-                    return true;
-                }
+            if (grid.isValid() && resolve(grid, rowNextCell, colNextCell)) {
+                return true;
             }
         }
-        grid.updateCell(row, col, -1);
 
+        grid.reinitializeCell(row, col);
         return false;
     }
 }
