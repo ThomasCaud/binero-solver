@@ -134,18 +134,14 @@ public class Grid {
         try {
             sleep(5L);
         } catch (Exception exception) {
-            System.err.println(exception);
+            System.err.println(exception.getMessage());
         }
 
         displayStrategy.display(this);
     }
 
-    public int getCell(int row, int col) {
-        return grid[row][col];
-    }
-
     public boolean isFulfilled(int row, int col) {
-        return getCell(row, col) != VALUE_EMPTY_CELL;
+        return grid[row][col] != VALUE_EMPTY_CELL;
     }
 
     public void updateCell(int row, int col, int value) {
