@@ -14,7 +14,7 @@ public class Main {
                 {-1, -1, -1, -1, -1, 1, -1, -1, 0, 0},
                 {1, 1, -1, -1, 0, -1, -1, -1, -1, 0},
                 {-1, -1, -1, -1, 0, -1, 0, 0, -1, -1}
-        }));
+        }, new DisplayStrategyFrame()));
         var existResult = Resolver.resolve(grid);
         if (existResult) {
             System.out.println("Solution: ");

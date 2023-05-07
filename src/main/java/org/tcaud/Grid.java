@@ -7,16 +7,27 @@ import static java.lang.Thread.sleep;
 public class Grid {
     public static final int VALUE_EMPTY_CELL = -1;
     private final int[][] grid;
-    private final DisplayStrategy displayStrategy = new DisplayStrategyFrame();
+    private final DisplayStrategy displayStrategy;
+
+    public Grid(int[][] grid, DisplayStrategy displayStrategy) {
+        checkDimensions(grid);
+        this.grid = grid;
+        this.displayStrategy = displayStrategy;
+    }
 
     public Grid(int[][] grid) {
+        checkDimensions(grid);
+        this.grid = grid;
+        this.displayStrategy = new DisplayStrategyConsole();
+    }
+
+    private void checkDimensions(int[][] grid) {
         if (grid.length != grid[0].length) {
             throw new IllegalArgumentException("Grid must be square");
         }
         if (grid.length % 2 == 1) {
             throw new IllegalArgumentException("Grid must have an even number of rows and columns");
         }
-        this.grid = grid;
     }
 
     public boolean isValid() {
