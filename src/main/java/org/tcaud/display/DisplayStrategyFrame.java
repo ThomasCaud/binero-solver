@@ -1,4 +1,4 @@
-package org.tcaud;
+package org.tcaud.display;
 
 import org.tcaud.grid.BineroGrid;
 

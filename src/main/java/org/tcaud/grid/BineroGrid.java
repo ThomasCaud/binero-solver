@@ -1,7 +1,7 @@
 package org.tcaud.grid;
 
-import org.tcaud.DisplayStrategy;
-import org.tcaud.DisplayStrategyConsole;
+import org.tcaud.display.DisplayStrategy;
+import org.tcaud.display.DisplayStrategyConsole;
 
 import java.util.Arrays;
 

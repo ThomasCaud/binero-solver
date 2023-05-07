@@ -1,5 +1,6 @@
 package org.tcaud;
 
+import org.tcaud.display.DisplayStrategyFrame;
 import org.tcaud.grid.BineroGrid;
 
 public class Main {
