@@ -1,15 +1,43 @@
 package org.tcaud.grid;
 
-public interface Grid {
-    boolean isValid();
+import org.tcaud.display.DisplayStrategy;
 
-    void display();
+import static java.lang.Thread.sleep;
 
-    int getDimension();
+public abstract class Grid {
+    public static final int VALUE_EMPTY_CELL = -1;
+    protected int[][] grid;
+    protected DisplayStrategy displayStrategy;
 
-    boolean isFulfilled(int row, int col);
+    public abstract boolean isValid();
 
-    void updateCell(int row, int col, int value);
+    public void display() {
+        try {
+            sleep(5L);
+        } catch (Exception exception) {
+            System.err.println(exception.getMessage());
+        }
 
-    void reinitializeCell(int row, int col);
+        displayStrategy.display(this);
+    }
+
+    public int getDimension() {
+        return grid.length;
+    }
+
+    public boolean isFulfilled(int row, int col) {
+        return grid[row][col] != VALUE_EMPTY_CELL;
+    }
+
+    public void updateCell(int row, int col, int value) {
+        grid[row][col] = value;
+    }
+
+    public void reinitializeCell(int row, int col) {
+        grid[row][col] = VALUE_EMPTY_CELL;
+    }
+
+    public int[][] getGrid() {
+        return grid;
+    }
 }

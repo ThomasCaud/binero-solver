@@ -1,6 +1,7 @@
 package org.tcaud.display;
 
 import org.tcaud.grid.BineroGrid;
+import org.tcaud.grid.Grid;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +17,7 @@ public class DisplayStrategyFrame implements DisplayStrategy {
     }
 
     @Override
-    public void display(BineroGrid grid) {
+    public void display(Grid grid) {
         jFrame.setLayout(new GridLayout(grid.getDimension(), grid.getDimension()));
 
         initializeTextFields(grid);
@@ -25,7 +26,7 @@ public class DisplayStrategyFrame implements DisplayStrategy {
         jFrame.setVisible(true);
     }
 
-    private void initializeTextFields(BineroGrid grid) {
+    private void initializeTextFields(Grid grid) {
         if (textFields == null) {
             textFields = new JTextField[grid.getDimension()][grid.getDimension()];
             for (int i = 0; i < grid.getDimension(); i++) {
@@ -40,7 +41,7 @@ public class DisplayStrategyFrame implements DisplayStrategy {
         }
     }
 
-    private void updateDigits(BineroGrid grid) {
+    private void updateDigits(Grid grid) {
         for (int i = 0; i < grid.getDimension(); i++) {
             for (int j = 0; j < grid.getDimension(); j++) {
                 var textField = textFields[i][j];

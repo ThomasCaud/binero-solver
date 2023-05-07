@@ -1,13 +1,13 @@
 package org.tcaud.display;
 
-import org.tcaud.grid.BineroGrid;
+import org.tcaud.grid.Grid;
 
 import static org.tcaud.grid.BineroGrid.VALUE_EMPTY_CELL;
 
 public class DisplayStrategyConsole implements DisplayStrategy {
 
     @Override
-    public void display(BineroGrid grid) {
+    public void display(Grid grid) {
         System.out.println("==============");
         for (int[] row : grid.getGrid()) {
             for (int cell : row) {
