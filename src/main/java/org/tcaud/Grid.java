@@ -2,9 +2,12 @@ package org.tcaud;
 
 import java.util.Arrays;
 
+import static java.lang.Thread.sleep;
+
 public class Grid {
-    private static final int VALUE_EMPTY_CELL = -1;
+    public static final int VALUE_EMPTY_CELL = -1;
     private final int[][] grid;
+    private final DisplayStrategy displayStrategy = new DisplayStrategyFrame();
 
     public Grid(int[][] grid) {
         if (grid.length != grid[0].length) {
@@ -117,12 +120,13 @@ public class Grid {
     }
 
     public void display() {
-        for (int[] row : grid) {
-            for (int cell : row) {
-                System.out.print(cell == VALUE_EMPTY_CELL ? ". " : cell + " ");
-            }
-            System.out.println();
+        try {
+            sleep(5L);
+        } catch (Exception exception) {
+            System.err.println(exception);
         }
+
+        displayStrategy.display(this);
     }
 
     public int getCell(int row, int col) {

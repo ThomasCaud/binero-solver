@@ -6,6 +6,7 @@ public class Resolver {
     }
 
     private static boolean resolve(Grid grid, Cell cell) {
+        grid.display();
         if (cell.row() >= grid.getDimension()) {
             return true;
         }
