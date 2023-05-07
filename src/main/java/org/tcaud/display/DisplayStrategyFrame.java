@@ -11,7 +11,7 @@ public class DisplayStrategyFrame implements DisplayStrategy {
     private JTextField[][] textFields;
 
     public DisplayStrategyFrame() {
-        jFrame = new JFrame("Binero grid");
+        jFrame = new JFrame();
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setSize(500, 500);
     }

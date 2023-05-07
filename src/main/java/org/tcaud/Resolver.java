@@ -19,7 +19,7 @@ public class Resolver {
             return resolve(grid, nextCell);
         }
 
-        int[] possibleValues = {0, 1};
+        int[] possibleValues = grid.getPossibleValues();
         for (int possibleValue : possibleValues) {
             grid.updateCell(cell.row(), cell.col(), possibleValue);
             if (grid.isValid() && resolve(grid, nextCell)) {

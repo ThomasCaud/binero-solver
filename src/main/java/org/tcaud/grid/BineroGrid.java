@@ -44,6 +44,16 @@ public class BineroGrid extends Grid {
         return !existsTwoFulfilledRowsIdentical() && !existsTwoFulfilledColumnsIdentical();
     }
 
+    @Override
+    public int[] getPossibleValues() {
+        return new int[]{0, 1};
+    }
+
+    @Override
+    public GAME getGame() {
+        return GAME.BINERO;
+    }
+
     private boolean isRowValid(int row) {
         return getNumberOfOnRow(row, 0) <= getDimension() / 2
                 && getNumberOfOnRow(row, 1) <= getDimension() / 2

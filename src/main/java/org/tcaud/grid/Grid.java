@@ -11,6 +11,10 @@ public abstract class Grid {
 
     public abstract boolean isValid();
 
+    public abstract int[] getPossibleValues();
+
+    public abstract GAME getGame();
+
     public void display() {
         try {
             sleep(5L);
