@@ -1,5 +1,7 @@
 package org.tcaud;
 
+import org.tcaud.grid.Grid;
+
 public class Resolver {
     public static boolean resolve(Grid grid) {
         return resolve(grid, new Cell(0, 0));

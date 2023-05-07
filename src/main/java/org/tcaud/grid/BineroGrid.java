@@ -1,21 +1,24 @@
-package org.tcaud;
+package org.tcaud.grid;
+
+import org.tcaud.DisplayStrategy;
+import org.tcaud.DisplayStrategyConsole;
 
 import java.util.Arrays;
 
 import static java.lang.Thread.sleep;
 
-public class Grid {
+public class BineroGrid implements Grid {
     public static final int VALUE_EMPTY_CELL = -1;
     private final int[][] grid;
     private final DisplayStrategy displayStrategy;
 
-    public Grid(int[][] grid, DisplayStrategy displayStrategy) {
+    public BineroGrid(int[][] grid, DisplayStrategy displayStrategy) {
         checkDimensions(grid);
         this.grid = grid;
         this.displayStrategy = displayStrategy;
     }
 
-    public Grid(int[][] grid) {
+    public BineroGrid(int[][] grid) {
         checkDimensions(grid);
         this.grid = grid;
         this.displayStrategy = new DisplayStrategyConsole();
@@ -30,6 +33,7 @@ public class Grid {
         }
     }
 
+    @Override
     public boolean isValid() {
         var dimension = getDimension();
 
@@ -125,11 +129,12 @@ public class Grid {
         return false;
     }
 
-
+    @Override
     public int getDimension() {
         return grid.length;
     }
 
+    @Override
     public void display() {
         try {
             sleep(5L);
@@ -140,14 +145,18 @@ public class Grid {
         displayStrategy.display(this);
     }
 
+
+    @Override
     public boolean isFulfilled(int row, int col) {
         return grid[row][col] != VALUE_EMPTY_CELL;
     }
 
+    @Override
     public void updateCell(int row, int col, int value) {
         grid[row][col] = value;
     }
 
+    @Override
     public void reinitializeCell(int row, int col) {
         grid[row][col] = VALUE_EMPTY_CELL;
     }
