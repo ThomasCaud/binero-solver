@@ -44,6 +44,8 @@ public class DisplayStrategyFrame implements DisplayStrategy {
                 var textField = textFields[i][j];
                 if (grid.getGrid()[i][j] != Grid.VALUE_EMPTY_CELL) {
                     textField.setText(Integer.toString(grid.getGrid()[i][j]));
+                } else {
+                    textField.setText("");
                 }
             }
         }
