@@ -2,37 +2,37 @@ package org.tcaud;
 
 public class Resolver {
     public static boolean resolve(Grid grid) {
-        return resolve(grid, 0, 0);
+        return resolve(grid, new Cell(0, 0));
     }
 
-    private static boolean resolve(Grid grid, int row, int col) {
-        if (row >= grid.getDimension()) {
+    private static boolean resolve(Grid grid, Cell cell) {
+        if (cell.row() >= grid.getDimension()) {
             return true;
         }
 
-        int rowNextCell;
-        int colNextCell;
-        if (col == grid.getDimension() - 1) {
-            rowNextCell = row + 1;
-            colNextCell = 0;
-        } else {
-            rowNextCell = row;
-            colNextCell = col + 1;
-        }
+        var nextCell = getNextCell(grid, cell.row(), cell.col());
 
-        if (grid.isFulfilled(row, col)) {
-            return resolve(grid, rowNextCell, colNextCell);
+        if (grid.isFulfilled(cell.row(), cell.col())) {
+            return resolve(grid, nextCell);
         }
 
         int[] possibleValues = {0, 1};
         for (int possibleValue : possibleValues) {
-            grid.updateCell(row, col, possibleValue);
-            if (grid.isValid() && resolve(grid, rowNextCell, colNextCell)) {
+            grid.updateCell(cell.row(), cell.col(), possibleValue);
+            if (grid.isValid() && resolve(grid, nextCell)) {
                 return true;
             }
         }
 
-        grid.reinitializeCell(row, col);
+        grid.reinitializeCell(cell.row(), cell.col());
         return false;
+    }
+
+    private static Cell getNextCell(Grid grid, int row, int col) {
+        if (col == grid.getDimension() - 1) {
+            return new Cell(row + 1, 0);
+        } else {
+            return new Cell(row, col + 1);
+        }
     }
 }
