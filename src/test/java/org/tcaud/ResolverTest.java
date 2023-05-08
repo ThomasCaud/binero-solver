@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.tcaud.grid.Board;
 import org.tcaud.grid.GameName;
-import org.tcaud.gridValidator.GridValidatorBinero;
-import org.tcaud.gridValidator.GridValidatorSudoku;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -13,11 +11,10 @@ class ResolverTest {
     @Test
     void resolve_bineroEasyGrid() {
         // given
-        var inputs = new int[][]{
+        var board = new Board(new int[][]{
                 {0, 1},
                 {-1, -1}
-        };
-        var grid = new GridValidatorBinero();
+        });
 
         var expectedResult = new int[][]{
                 {0, 1},
@@ -25,7 +22,6 @@ class ResolverTest {
         };
 
         // when
-        var board = new Board(inputs);
         var existResult = Resolver.resolve(GameName.BINERO, board, new DisplayStrategyEmpty());
 
         // then
@@ -39,11 +35,10 @@ class ResolverTest {
     @Test
     void resolve_bineroEasyGridWithBacktrack() {
         // given
-        var inputs = new int[][]{
+        var board = new Board(new int[][]{
                 {-1, -1},
                 {1, 0}
-        };
-        var grid = new GridValidatorBinero();
+        });
 
         var expectedResult = new int[][]{
                 {0, 1},
@@ -51,7 +46,6 @@ class ResolverTest {
         };
 
         // when
-        var board = new Board(inputs);
         var existResult = Resolver.resolve(GameName.BINERO, board, new DisplayStrategyEmpty());
 
         // then
@@ -65,15 +59,14 @@ class ResolverTest {
     @Test
     void resolve_bineroMediumGrid() {
         // given
-        var inputs = new int[][]{
+        var board = new Board(new int[][]{
                 {-1, 0, -1, -1, 1, -1},
                 {-1, -1, 0, -1, -1, 1},
                 {0, -1, -1, -1, 0, -1},
                 {-1, 0, -1, -1, -1, -1},
                 {1, -1, 1, -1, -1, 1},
                 {0, -1, -1, -1, 1, -1},
-        };
-        var grid = new GridValidatorBinero();
+        });
 
         var expectedResult = new int[][]{
                 {1, 0, 1, 0, 1, 0},
@@ -85,7 +78,6 @@ class ResolverTest {
         };
 
         // when
-        var board = new Board(inputs);
         var existResult = Resolver.resolve(GameName.BINERO, board, new DisplayStrategyEmpty());
 
         // then
@@ -99,7 +91,7 @@ class ResolverTest {
     @Test
     void resolve_bineroHardGrid() {
         // given
-        var inputs = new int[][]{
+        var board = new Board(new int[][]{
                 {-1, 0, -1, 1, -1, -1, -1, 1, -1, 0},
                 {-1, 0, 0, -1, -1, -1, 0, -1, -1, -1},
                 {-1, -1, -1, -1, -1, 0, -1, -1, 0, 1},
@@ -110,8 +102,7 @@ class ResolverTest {
                 {-1, -1, -1, -1, -1, 1, -1, -1, 0, 0},
                 {1, 1, -1, -1, 0, -1, -1, -1, -1, 0},
                 {-1, -1, -1, -1, 0, -1, 0, 0, -1, -1},
-        };
-        var grid = new GridValidatorBinero();
+        });
 
         var expectedResult = new int[][]{
                 {1, 0, 0, 1, 1, 0, 1, 1, 0, 0},
@@ -127,7 +118,6 @@ class ResolverTest {
         };
 
         // when
-        var board = new Board(inputs);
         var existResult = Resolver.resolve(GameName.BINERO, board, new DisplayStrategyEmpty());
 
         // then
@@ -141,7 +131,7 @@ class ResolverTest {
     @Test
     void resolve_sudoku() {
         // given
-        var inputs = new int[][]{
+        var board = new Board(new int[][]{
                 {-1, -1, 4, -1, 5, -1, -1, -1, -1},
                 {9, -1, -1, 7, 3, 4, 6, -1, -1},
                 {-1, -1, 3, -1, 2, 1, -1, 4, 9},
@@ -151,8 +141,7 @@ class ResolverTest {
                 {3, 1, -1, 9, 7, -1, 2, -1, -1},
                 {-1, -1, 9, 1, 8, 2, -1, -1, 3},
                 {-1, -1, -1, -1, 6, -1, 1, -1, -1}
-        };
-        var grid = new GridValidatorSudoku();
+        });
 
         var expectedResult = new int[][]{
                 {2, 6, 4, 8, 5, 9, 7, 3, 1},
@@ -167,8 +156,7 @@ class ResolverTest {
         };
 
         // when
-        var board = new Board(inputs);
-        var existResult = Resolver.resolve(GameName.BINERO, board, new DisplayStrategyEmpty());
+        var existResult = Resolver.resolve(GameName.SUDOKU, board, new DisplayStrategyEmpty());
 
         // then
         assertTrue(existResult);
