@@ -1,24 +1,25 @@
 package org.tcaud.grid;
 
-import org.tcaud.display.DisplayStrategy;
-import org.tcaud.display.DisplayStrategyConsole;
-
 import java.util.stream.IntStream;
+
+import static org.tcaud.grid.Board.VALUE_EMPTY_CELL;
 
 public class SudokuGrid extends Grid {
     private static final int BOARD_SIZE = 9;
     private static final int SUBSECTION_SIZE = 3;
 
-    public SudokuGrid(int[][] grid, DisplayStrategy displayStrategy) {
-        checkDimensions(grid);
-        this.grid = grid;
-        this.displayStrategy = displayStrategy;
-    }
+    @Override
+    public boolean isValid(Board board) {
+        checkDimensions(board.grid);
 
-    public SudokuGrid(int[][] grid) {
-        checkDimensions(grid);
-        this.grid = grid;
-        this.displayStrategy = new DisplayStrategyConsole();
+        for (int row = 0; row < BOARD_SIZE; row++) {
+            for (int col = 0; col < BOARD_SIZE; col++) {
+                if (!isValid(board, row, col)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     private void checkDimensions(int[][] grid) {
@@ -27,32 +28,10 @@ public class SudokuGrid extends Grid {
         }
     }
 
-    @Override
-    public boolean isValid() {
-        for (int row = 0; row < BOARD_SIZE; row++) {
-            for (int col = 0; col < BOARD_SIZE; col++) {
-                if (!isValid(row, col)) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public int[] getPossibleValues() {
-        return new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
-    }
-
-    @Override
-    public GAME getGame() {
-        return GAME.SUDOKU;
-    }
-
-    private boolean isValid(int row, int column) {
-        return rowConstraint(getGrid(), row)
-                && columnConstraint(getGrid(), column)
-                && subsectionConstraint(getGrid(), row, column);
+    private boolean isValid(Board board, int row, int column) {
+        return rowConstraint(board.getGrid(), row)
+                && columnConstraint(board.getGrid(), column)
+                && subsectionConstraint(board.getGrid(), row, column);
     }
 
     private boolean rowConstraint(int[][] board, int row) {
@@ -97,5 +76,10 @@ public class SudokuGrid extends Grid {
             }
         }
         return true;
+    }
+
+    @Override
+    public int[] getPossibleValues() {
+        return new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
     }
 }

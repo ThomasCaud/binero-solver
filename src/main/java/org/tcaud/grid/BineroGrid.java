@@ -1,23 +1,10 @@
 package org.tcaud.grid;
 
-import org.tcaud.display.DisplayStrategy;
-import org.tcaud.display.DisplayStrategyConsole;
-
 import java.util.Arrays;
 
+import static org.tcaud.grid.Board.VALUE_EMPTY_CELL;
+
 public class BineroGrid extends Grid {
-
-    public BineroGrid(int[][] grid, DisplayStrategy displayStrategy) {
-        checkDimensions(grid);
-        this.grid = grid;
-        this.displayStrategy = displayStrategy;
-    }
-
-    public BineroGrid(int[][] grid) {
-        checkDimensions(grid);
-        this.grid = grid;
-        this.displayStrategy = new DisplayStrategyConsole();
-    }
 
     private void checkDimensions(int[][] grid) {
         if (grid.length != grid[0].length) {
@@ -29,19 +16,21 @@ public class BineroGrid extends Grid {
     }
 
     @Override
-    public boolean isValid() {
-        var dimension = getDimension();
+    public boolean isValid(Board board) {
+        checkDimensions(board.getGrid());
+
+        var dimension = board.getDimension();
 
         for (int i = 0; i < dimension; i++) {
-            if (!isRowValid(i)) {
+            if (!isRowValid(board, i)) {
                 return false;
             }
-            if (!isColumnValid(i)) {
+            if (!isColumnValid(board, i)) {
                 return false;
             }
         }
 
-        return !existsTwoFulfilledRowsIdentical() && !existsTwoFulfilledColumnsIdentical();
+        return !existsTwoFulfilledRowsIdentical(board) && !existsTwoFulfilledColumnsIdentical(board);
     }
 
     @Override
@@ -49,21 +38,16 @@ public class BineroGrid extends Grid {
         return new int[]{0, 1};
     }
 
-    @Override
-    public GAME getGame() {
-        return GAME.BINERO;
+    private boolean isRowValid(Board board, int row) {
+        return getNumberOfOnRow(board, row, 0) <= board.getDimension() / 2
+                && getNumberOfOnRow(board, row, 1) <= board.getDimension() / 2
+                && !existsMoreThanTwoIdenticalValueInARow(board, row);
     }
 
-    private boolean isRowValid(int row) {
-        return getNumberOfOnRow(row, 0) <= getDimension() / 2
-                && getNumberOfOnRow(row, 1) <= getDimension() / 2
-                && !existsMoreThanTwoIdenticalValueInARow(row);
-    }
-
-    private boolean existsTwoFulfilledRowsIdentical() {
-        for (int i = 0; i < getDimension(); i++) {
-            for (int j = i + 1; j < getDimension(); j++) {
-                if (Arrays.equals(grid[i], grid[j]) && Arrays.stream(grid[i]).noneMatch(cell -> cell == VALUE_EMPTY_CELL)) {
+    private boolean existsTwoFulfilledRowsIdentical(Board board) {
+        for (int i = 0; i < board.getDimension(); i++) {
+            for (int j = i + 1; j < board.getDimension(); j++) {
+                if (Arrays.equals(board.grid[i], board.grid[j]) && Arrays.stream(board.grid[i]).noneMatch(cell -> cell == VALUE_EMPTY_CELL)) {
                     return true;
                 }
             }
@@ -71,10 +55,10 @@ public class BineroGrid extends Grid {
         return false;
     }
 
-    private boolean existsTwoFulfilledColumnsIdentical() {
-        for (int i = 0; i < getDimension(); i++) {
-            for (int j = i + 1; j < getDimension(); j++) {
-                if (Arrays.equals(getColumn(i), getColumn(j)) && Arrays.stream(getColumn(i)).noneMatch(cell -> cell == VALUE_EMPTY_CELL)) {
+    private boolean existsTwoFulfilledColumnsIdentical(Board board) {
+        for (int i = 0; i < board.getDimension(); i++) {
+            for (int j = i + 1; j < board.getDimension(); j++) {
+                if (Arrays.equals(getColumn(board, i), getColumn(board, j)) && Arrays.stream(getColumn(board, i)).noneMatch(cell -> cell == VALUE_EMPTY_CELL)) {
                     return true;
                 }
             }
@@ -82,19 +66,19 @@ public class BineroGrid extends Grid {
         return false;
     }
 
-    private int[] getColumn(int column) {
-        return Arrays.stream(grid).mapToInt(row -> row[column]).toArray();
+    private int[] getColumn(Board board, int column) {
+        return Arrays.stream(board.grid).mapToInt(row -> row[column]).toArray();
     }
 
-    private int getNumberOfOnRow(int row, int value) {
-        return Arrays.stream(grid[row]).filter(cell -> cell == value).toArray().length;
+    private int getNumberOfOnRow(Board board, int row, int value) {
+        return Arrays.stream(board.grid[row]).filter(cell -> cell == value).toArray().length;
     }
 
-    private boolean existsMoreThanTwoIdenticalValueInARow(int row) {
-        var previousValue = grid[row][0];
+    private boolean existsMoreThanTwoIdenticalValueInARow(Board board, int row) {
+        var previousValue = board.grid[row][0];
         var count = 1;
-        for (int i = 1; i < getDimension(); i++) {
-            if (grid[row][i] == previousValue) {
+        for (int i = 1; i < board.getDimension(); i++) {
+            if (board.grid[row][i] == previousValue) {
                 count++;
             } else {
                 count = 1;
@@ -102,26 +86,26 @@ public class BineroGrid extends Grid {
             if (count > 2 && previousValue != VALUE_EMPTY_CELL) {
                 return true;
             }
-            previousValue = grid[row][i];
+            previousValue = board.grid[row][i];
         }
         return false;
     }
 
-    private boolean isColumnValid(int column) {
-        return getNumberOfOnColumn(column, 0) <= getDimension() / 2
-                && getNumberOfOnColumn(column, 1) <= getDimension() / 2
-                && !existsMoreThanTwoIdenticalValueInAColumn(column);
+    private boolean isColumnValid(Board board, int column) {
+        return getNumberOfOnColumn(board, column, 0) <= board.getDimension() / 2
+                && getNumberOfOnColumn(board, column, 1) <= board.getDimension() / 2
+                && !existsMoreThanTwoIdenticalValueInAColumn(board, column);
     }
 
-    private int getNumberOfOnColumn(int column, int value) {
-        return Arrays.stream(grid).mapToInt(row -> row[column]).filter(cell -> cell == value).toArray().length;
+    private int getNumberOfOnColumn(Board board, int column, int value) {
+        return Arrays.stream(board.grid).mapToInt(row -> row[column]).filter(cell -> cell == value).toArray().length;
     }
 
-    private boolean existsMoreThanTwoIdenticalValueInAColumn(int column) {
-        var previousValue = grid[0][column];
+    private boolean existsMoreThanTwoIdenticalValueInAColumn(Board board, int column) {
+        var previousValue = board.grid[0][column];
         var count = 1;
-        for (int i = 1; i < getDimension(); i++) {
-            if (grid[i][column] == previousValue) {
+        for (int i = 1; i < board.getDimension(); i++) {
+            if (board.grid[i][column] == previousValue) {
                 count++;
             } else {
                 count = 1;
@@ -129,7 +113,7 @@ public class BineroGrid extends Grid {
             if (count > 2 && previousValue != VALUE_EMPTY_CELL) {
                 return true;
             }
-            previousValue = grid[i][column];
+            previousValue = board.grid[i][column];
         }
         return false;
     }

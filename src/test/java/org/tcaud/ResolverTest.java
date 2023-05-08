@@ -3,6 +3,7 @@ package org.tcaud;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.tcaud.grid.BineroGrid;
+import org.tcaud.grid.Board;
 import org.tcaud.grid.SudokuGrid;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -11,10 +12,11 @@ class ResolverTest {
     @Test
     void resolve_bineroEasyGrid() {
         // given
-        var grid = (new BineroGrid(new int[][]{
+        var inputs = new int[][]{
                 {0, 1},
                 {-1, -1}
-        }));
+        };
+        var grid = new BineroGrid();
 
         var expectedResult = new int[][]{
                 {0, 1},
@@ -22,23 +24,25 @@ class ResolverTest {
         };
 
         // when
-        var existResult = Resolver.resolve(grid);
+        var board = new Board(inputs);
+        var existResult = Resolver.resolve(grid, board, new DisplayStrategyEmpty());
 
         // then
         assertTrue(existResult);
 
-        for (int i = 0; i < grid.getDimension(); i++) {
-            Assertions.assertArrayEquals(expectedResult[i], grid.getGrid()[i]);
+        for (int i = 0; i < board.getDimension(); i++) {
+            Assertions.assertArrayEquals(expectedResult[i], board.getGrid()[i]);
         }
     }
 
     @Test
     void resolve_bineroEasyGridWithBacktrack() {
         // given
-        var grid = (new BineroGrid(new int[][]{
+        var inputs = new int[][]{
                 {-1, -1},
                 {1, 0}
-        }));
+        };
+        var grid = new BineroGrid();
 
         var expectedResult = new int[][]{
                 {0, 1},
@@ -46,29 +50,30 @@ class ResolverTest {
         };
 
         // when
-        var existResult = Resolver.resolve(grid);
+        var board = new Board(inputs);
+        var existResult = Resolver.resolve(grid, board, new DisplayStrategyEmpty());
 
         // then
         assertTrue(existResult);
 
-        for (int i = 0; i < grid.getDimension(); i++) {
-            Assertions.assertArrayEquals(expectedResult[i], grid.getGrid()[i]);
+        for (int i = 0; i < board.getDimension(); i++) {
+            Assertions.assertArrayEquals(expectedResult[i], board.getGrid()[i]);
         }
     }
 
     @Test
     void resolve_bineroMediumGrid() {
         // given
-        var grid = (new BineroGrid(new int[][]{
+        var inputs = new int[][]{
                 {-1, 0, -1, -1, 1, -1},
                 {-1, -1, 0, -1, -1, 1},
                 {0, -1, -1, -1, 0, -1},
                 {-1, 0, -1, -1, -1, -1},
                 {1, -1, 1, -1, -1, 1},
                 {0, -1, -1, -1, 1, -1},
-        }));
+        };
+        var grid = new BineroGrid();
 
-        // to complete
         var expectedResult = new int[][]{
                 {1, 0, 1, 0, 1, 0},
                 {0, 1, 0, 1, 0, 1},
@@ -79,20 +84,21 @@ class ResolverTest {
         };
 
         // when
-        var existResult = Resolver.resolve(grid);
+        var board = new Board(inputs);
+        var existResult = Resolver.resolve(grid, board, new DisplayStrategyEmpty());
 
         // then
         assertTrue(existResult);
 
-        for (int i = 0; i < grid.getDimension(); i++) {
-            Assertions.assertArrayEquals(expectedResult[i], grid.getGrid()[i]);
+        for (int i = 0; i < board.getDimension(); i++) {
+            Assertions.assertArrayEquals(expectedResult[i], board.getGrid()[i]);
         }
     }
 
     @Test
     void resolve_bineroHardGrid() {
         // given
-        var grid = (new BineroGrid(new int[][]{
+        var inputs = new int[][]{
                 {-1, 0, -1, 1, -1, -1, -1, 1, -1, 0},
                 {-1, 0, 0, -1, -1, -1, 0, -1, -1, -1},
                 {-1, -1, -1, -1, -1, 0, -1, -1, 0, 1},
@@ -103,7 +109,8 @@ class ResolverTest {
                 {-1, -1, -1, -1, -1, 1, -1, -1, 0, 0},
                 {1, 1, -1, -1, 0, -1, -1, -1, -1, 0},
                 {-1, -1, -1, -1, 0, -1, 0, 0, -1, -1},
-        }, new DisplayStrategyEmpty()));
+        };
+        var grid = new BineroGrid();
 
         var expectedResult = new int[][]{
                 {1, 0, 0, 1, 1, 0, 1, 1, 0, 0},
@@ -119,20 +126,21 @@ class ResolverTest {
         };
 
         // when
-        var existResult = Resolver.resolve(grid);
+        var board = new Board(inputs);
+        var existResult = Resolver.resolve(grid, board, new DisplayStrategyEmpty());
 
         // then
         assertTrue(existResult);
 
-        for (int i = 0; i < grid.getDimension(); i++) {
-            Assertions.assertArrayEquals(expectedResult[i], grid.getGrid()[i]);
+        for (int i = 0; i < board.getDimension(); i++) {
+            Assertions.assertArrayEquals(expectedResult[i], board.getGrid()[i]);
         }
     }
 
     @Test
     void resolve_sudoku() {
         // given
-        var grid = (new SudokuGrid(new int[][]{
+        var inputs = new int[][]{
                 {-1, -1, 4, -1, 5, -1, -1, -1, -1},
                 {9, -1, -1, 7, 3, 4, 6, -1, -1},
                 {-1, -1, 3, -1, 2, 1, -1, 4, 9},
@@ -142,7 +150,8 @@ class ResolverTest {
                 {3, 1, -1, 9, 7, -1, 2, -1, -1},
                 {-1, -1, 9, 1, 8, 2, -1, -1, 3},
                 {-1, -1, -1, -1, 6, -1, 1, -1, -1}
-        }, new DisplayStrategyEmpty()));
+        };
+        var grid = new SudokuGrid();
 
         var expectedResult = new int[][]{
                 {2, 6, 4, 8, 5, 9, 7, 3, 1},
@@ -157,13 +166,14 @@ class ResolverTest {
         };
 
         // when
-        var existResult = Resolver.resolve(grid);
+        var board = new Board(inputs);
+        var existResult = Resolver.resolve(grid, board, new DisplayStrategyEmpty());
 
         // then
         assertTrue(existResult);
 
-        for (int i = 0; i < grid.getDimension(); i++) {
-            Assertions.assertArrayEquals(expectedResult[i], grid.getGrid()[i]);
+        for (int i = 0; i < board.getDimension(); i++) {
+            Assertions.assertArrayEquals(expectedResult[i], board.getGrid()[i]);
         }
     }
 }
