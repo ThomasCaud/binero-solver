@@ -1,6 +1,7 @@
 package org.tcaud.gridValidator;
 
 import org.tcaud.grid.Board;
+import org.tcaud.grid.GameName;
 
 import java.util.stream.IntStream;
 
@@ -83,5 +84,10 @@ public class GridValidatorSudoku extends GridValidator {
     @Override
     public int[] getPossibleValues() {
         return new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
+    }
+
+    @Override
+    public boolean isEligible(GameName gameName) {
+        return gameName == GameName.SUDOKU;
     }
 }

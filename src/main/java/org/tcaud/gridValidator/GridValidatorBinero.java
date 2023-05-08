@@ -1,6 +1,7 @@
 package org.tcaud.gridValidator;
 
 import org.tcaud.grid.Board;
+import org.tcaud.grid.GameName;
 
 import java.util.Arrays;
 
@@ -118,5 +119,10 @@ public class GridValidatorBinero extends GridValidator {
     @Override
     public int[] getPossibleValues() {
         return new int[]{0, 1};
+    }
+
+    @Override
+    public boolean isEligible(GameName gameName) {
+        return gameName == GameName.BINERO;
     }
 }

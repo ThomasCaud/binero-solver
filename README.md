@@ -4,8 +4,7 @@
   deduce missing digits. The most known game is the Sudoku for example.
 - You only have to update the "Main" class with the grid you would like to solve. Set "-1" for empty cell.
 - Two ways of displaying are available: through console of through JFrame. See the `DisplayStrategy` interface.
-- To solve another Game, you only have to extend the abstract class `Grid` and implement the abstract methods (mainly
-  the `isValid` one). The solver will manage the rest.
+- To solve another Game, you only have to extend the abstract class `GridValidator`. The solver will manage the rest.
 
 ## Sudoku
 

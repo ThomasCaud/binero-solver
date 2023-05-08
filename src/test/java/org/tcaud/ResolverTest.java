@@ -3,6 +3,7 @@ package org.tcaud;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.tcaud.grid.Board;
+import org.tcaud.grid.GameName;
 import org.tcaud.gridValidator.GridValidatorBinero;
 import org.tcaud.gridValidator.GridValidatorSudoku;
 
@@ -25,7 +26,7 @@ class ResolverTest {
 
         // when
         var board = new Board(inputs);
-        var existResult = Resolver.resolve(grid, board, new DisplayStrategyEmpty());
+        var existResult = Resolver.resolve(GameName.BINERO, board, new DisplayStrategyEmpty());
 
         // then
         assertTrue(existResult);
@@ -51,7 +52,7 @@ class ResolverTest {
 
         // when
         var board = new Board(inputs);
-        var existResult = Resolver.resolve(grid, board, new DisplayStrategyEmpty());
+        var existResult = Resolver.resolve(GameName.BINERO, board, new DisplayStrategyEmpty());
 
         // then
         assertTrue(existResult);
@@ -85,7 +86,7 @@ class ResolverTest {
 
         // when
         var board = new Board(inputs);
-        var existResult = Resolver.resolve(grid, board, new DisplayStrategyEmpty());
+        var existResult = Resolver.resolve(GameName.BINERO, board, new DisplayStrategyEmpty());
 
         // then
         assertTrue(existResult);
@@ -127,7 +128,7 @@ class ResolverTest {
 
         // when
         var board = new Board(inputs);
-        var existResult = Resolver.resolve(grid, board, new DisplayStrategyEmpty());
+        var existResult = Resolver.resolve(GameName.BINERO, board, new DisplayStrategyEmpty());
 
         // then
         assertTrue(existResult);
@@ -167,7 +168,7 @@ class ResolverTest {
 
         // when
         var board = new Board(inputs);
-        var existResult = Resolver.resolve(grid, board, new DisplayStrategyEmpty());
+        var existResult = Resolver.resolve(GameName.BINERO, board, new DisplayStrategyEmpty());
 
         // then
         assertTrue(existResult);

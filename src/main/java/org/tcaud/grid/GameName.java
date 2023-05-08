@@ -1,6 +1,6 @@
 package org.tcaud.grid;
 
-public enum Game {
+public enum GameName {
     BINERO,
     SUDOKU
 }
