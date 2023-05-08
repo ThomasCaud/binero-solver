@@ -1,16 +1,18 @@
-package org.tcaud.grid;
+package org.tcaud.gridValidator;
+
+import org.tcaud.grid.Board;
 
 import java.util.stream.IntStream;
 
 import static org.tcaud.grid.Board.VALUE_EMPTY_CELL;
 
-public class SudokuGrid extends Grid {
+public class GridValidatorSudoku extends GridValidator {
     private static final int BOARD_SIZE = 9;
     private static final int SUBSECTION_SIZE = 3;
 
     @Override
     public boolean isValid(Board board) {
-        checkDimensions(board.grid);
+        checkDimensions(board.getGrid());
 
         for (int row = 0; row < BOARD_SIZE; row++) {
             for (int col = 0; col < BOARD_SIZE; col++) {

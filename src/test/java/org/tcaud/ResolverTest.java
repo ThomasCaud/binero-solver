@@ -2,9 +2,9 @@ package org.tcaud;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.tcaud.grid.BineroGrid;
 import org.tcaud.grid.Board;
-import org.tcaud.grid.SudokuGrid;
+import org.tcaud.gridValidator.GridValidatorBinero;
+import org.tcaud.gridValidator.GridValidatorSudoku;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -16,7 +16,7 @@ class ResolverTest {
                 {0, 1},
                 {-1, -1}
         };
-        var grid = new BineroGrid();
+        var grid = new GridValidatorBinero();
 
         var expectedResult = new int[][]{
                 {0, 1},
@@ -42,7 +42,7 @@ class ResolverTest {
                 {-1, -1},
                 {1, 0}
         };
-        var grid = new BineroGrid();
+        var grid = new GridValidatorBinero();
 
         var expectedResult = new int[][]{
                 {0, 1},
@@ -72,7 +72,7 @@ class ResolverTest {
                 {1, -1, 1, -1, -1, 1},
                 {0, -1, -1, -1, 1, -1},
         };
-        var grid = new BineroGrid();
+        var grid = new GridValidatorBinero();
 
         var expectedResult = new int[][]{
                 {1, 0, 1, 0, 1, 0},
@@ -110,7 +110,7 @@ class ResolverTest {
                 {1, 1, -1, -1, 0, -1, -1, -1, -1, 0},
                 {-1, -1, -1, -1, 0, -1, 0, 0, -1, -1},
         };
-        var grid = new BineroGrid();
+        var grid = new GridValidatorBinero();
 
         var expectedResult = new int[][]{
                 {1, 0, 0, 1, 1, 0, 1, 1, 0, 0},
@@ -151,7 +151,7 @@ class ResolverTest {
                 {-1, -1, 9, 1, 8, 2, -1, -1, 3},
                 {-1, -1, -1, -1, 6, -1, 1, -1, -1}
         };
-        var grid = new SudokuGrid();
+        var grid = new GridValidatorSudoku();
 
         var expectedResult = new int[][]{
                 {2, 6, 4, 8, 5, 9, 7, 3, 1},

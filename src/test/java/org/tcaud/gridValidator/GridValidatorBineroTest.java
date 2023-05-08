@@ -1,13 +1,14 @@
-package org.tcaud.grid;
+package org.tcaud.gridValidator;
 
 import org.junit.jupiter.api.Test;
+import org.tcaud.grid.Board;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class GridTest {
-    private final Grid bineroGrid = new BineroGrid();
+class GridValidatorBineroTest {
+    private final GridValidator bineroGridValidator = new GridValidatorBinero();
 
     @Test
     void isValid_boardDotSquare_throwsException() {
@@ -16,7 +17,7 @@ class GridTest {
                 {1, 1, 0, 0},
                 {0, 1, 0, 1}
         });
-        assertThrows(IllegalArgumentException.class, () -> bineroGrid.isValid(board));
+        assertThrows(IllegalArgumentException.class, () -> bineroGridValidator.isValid(board));
     }
 
     @Test
@@ -26,7 +27,7 @@ class GridTest {
                 {1, 1, 0},
                 {0, 1, 0},
         });
-        assertThrows(IllegalArgumentException.class, () -> bineroGrid.isValid(board));
+        assertThrows(IllegalArgumentException.class, () -> bineroGridValidator.isValid(board));
     }
 
     @Test
@@ -37,7 +38,7 @@ class GridTest {
                 {0, 1, 0, 1},
                 {1, 0, 1, 0}
         });
-        assertTrue(bineroGrid.isValid(board));
+        assertTrue(bineroGridValidator.isValid(board));
     }
 
     @Test
@@ -48,7 +49,7 @@ class GridTest {
                 {0, 1, 0, 1},
                 {1, 0, 1, 0}
         });
-        assertFalse(bineroGrid.isValid(board));
+        assertFalse(bineroGridValidator.isValid(board));
     }
 
     @Test
@@ -59,7 +60,7 @@ class GridTest {
                 {0, 0, 0, 1},
                 {1, 0, 1, 0}
         });
-        assertFalse(bineroGrid.isValid(board));
+        assertFalse(bineroGridValidator.isValid(board));
     }
 
     @Test
@@ -70,7 +71,7 @@ class GridTest {
                 {0, 1, 0, 1},
                 {1, -1, -1, 1}
         });
-        assertFalse(bineroGrid.isValid(board));
+        assertFalse(bineroGridValidator.isValid(board));
     }
 
     @Test
@@ -81,7 +82,7 @@ class GridTest {
                 {0, -1, -1, 0},
                 {1, 0, 1, 0}
         });
-        assertFalse(bineroGrid.isValid(board));
+        assertFalse(bineroGridValidator.isValid(board));
     }
 
     @Test
@@ -94,7 +95,7 @@ class GridTest {
                 {-1, -1, -1, -1, -1, -1},
                 {-1, -1, -1, -1, -1, -1}
         });
-        assertFalse(bineroGrid.isValid(board));
+        assertFalse(bineroGridValidator.isValid(board));
     }
 
     @Test
@@ -107,7 +108,7 @@ class GridTest {
                 {-1, 0, -1, -1, -1, -1},
                 {-1, -1, -1, -1, -1, -1}
         });
-        assertFalse(bineroGrid.isValid(board));
+        assertFalse(bineroGridValidator.isValid(board));
     }
 
     @Test
@@ -120,7 +121,7 @@ class GridTest {
                 {-1, -1, -1, -1, -1, -1},
                 {-1, -1, -1, -1, -1, -1}
         });
-        assertFalse(bineroGrid.isValid(board));
+        assertFalse(bineroGridValidator.isValid(board));
     }
 
     @Test
@@ -133,6 +134,6 @@ class GridTest {
                 {0, 0, -1, -1, -1, -1},
                 {1, 1, -1, -1, -1, -1}
         });
-        assertFalse(bineroGrid.isValid(board));
+        assertFalse(bineroGridValidator.isValid(board));
     }
 }

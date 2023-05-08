@@ -1,6 +1,8 @@
-package org.tcaud.grid;
+package org.tcaud.gridValidator;
 
-public abstract class Grid {
+import org.tcaud.grid.Board;
+
+public abstract class GridValidator {
     public abstract boolean isValid(Board board);
 
     public abstract int[] getPossibleValues();

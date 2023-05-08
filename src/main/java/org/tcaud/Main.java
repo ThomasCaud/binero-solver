@@ -2,7 +2,7 @@ package org.tcaud;
 
 import org.tcaud.display.DisplayStrategyFrame;
 import org.tcaud.grid.Board;
-import org.tcaud.grid.SudokuGrid;
+import org.tcaud.gridValidator.GridValidatorSudoku;
 
 public class Main {
     public static void main(String[] args) {
@@ -31,7 +31,7 @@ public class Main {
                 {-1, 9, -1, -1, -1, -1, 4, -1, -1}
         };
 
-        var sudokuGrid = new SudokuGrid();
+        var sudokuGrid = new GridValidatorSudoku();
         var sudokuBoard = new Board(sudokuInputs);
 
         var existResult = Resolver.resolve(sudokuGrid, sudokuBoard, new DisplayStrategyFrame());
