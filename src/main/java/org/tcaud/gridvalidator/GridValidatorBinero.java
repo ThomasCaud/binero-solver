@@ -1,4 +1,4 @@
-package org.tcaud.gridValidator;
+package org.tcaud.gridvalidator;
 
 import org.tcaud.grid.Board;
 import org.tcaud.grid.GameName;
@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 import static org.tcaud.grid.Board.VALUE_EMPTY_CELL;
 
-public class GridValidatorBinero extends GridValidator {
+public class GridValidatorBinero implements GridValidator {
 
     @Override
     public boolean isValid(Board board) {

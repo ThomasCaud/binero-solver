@@ -11,7 +11,7 @@ public class DisplayStrategyFrame implements DisplayStrategy {
 
     public DisplayStrategyFrame() {
         jFrame = new JFrame();
-        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jFrame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         jFrame.setSize(500, 500);
     }
 
@@ -31,7 +31,7 @@ public class DisplayStrategyFrame implements DisplayStrategy {
             for (int i = 0; i < board.getDimension(); i++) {
                 for (int j = 0; j < board.getDimension(); j++) {
                     var textField = new JTextField();
-                    textField.setHorizontalAlignment(JTextField.CENTER);
+                    textField.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                     textField.setEditable(false);
                     jFrame.add(textField);
                     textFields[i][j] = textField;

@@ -1,4 +1,4 @@
-package org.tcaud.gridValidator;
+package org.tcaud.gridvalidator;
 
 import org.tcaud.grid.Board;
 import org.tcaud.grid.GameName;
@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 import static org.tcaud.grid.Board.VALUE_EMPTY_CELL;
 
-public class GridValidatorSudoku extends GridValidator {
+public class GridValidatorSudoku implements GridValidator {
     private static final int BOARD_SIZE = 9;
     private static final int SUBSECTION_SIZE = 3;
 

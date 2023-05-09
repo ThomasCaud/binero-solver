@@ -19,7 +19,7 @@ test {
     useJUnitPlatform()
 }
 
-sonarqube {
+sonar {
     properties {
         property "sonar.projectKey", "ThomasCaud_numeric-puzzle-solver"
         property "sonar.organization", "thomascaud-github"

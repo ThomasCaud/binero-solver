@@ -2,6 +2,8 @@ package org.tcaud.gridValidator;
 
 import org.junit.jupiter.api.Test;
 import org.tcaud.grid.Board;
+import org.tcaud.gridvalidator.GridValidator;
+import org.tcaud.gridvalidator.GridValidatorSudoku;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;

@@ -3,9 +3,9 @@ package org.tcaud;
 import org.tcaud.display.DisplayStrategy;
 import org.tcaud.grid.Board;
 import org.tcaud.grid.GameName;
-import org.tcaud.gridValidator.GridValidator;
-import org.tcaud.gridValidator.GridValidatorBinero;
-import org.tcaud.gridValidator.GridValidatorSudoku;
+import org.tcaud.gridvalidator.GridValidator;
+import org.tcaud.gridvalidator.GridValidatorBinero;
+import org.tcaud.gridvalidator.GridValidatorSudoku;
 
 import java.util.List;
 
@@ -16,9 +16,16 @@ public class Resolver {
     );
 
     public static boolean resolve(GameName gameName, Board board, DisplayStrategy displayStrategy) {
-        var gridValidator = gridValidatorList.stream().filter(maybeGridValidator -> maybeGridValidator.isEligible(gameName)).findFirst().get();
-
+        var gridValidator = getGridValidator(gameName);
         return resolve(gridValidator, board, new Cell(0, 0), displayStrategy);
+    }
+
+    private static GridValidator getGridValidator(GameName gameName) {
+        var optionalGridValidator = gridValidatorList.stream().filter(maybeGridValidator -> maybeGridValidator.isEligible(gameName)).findFirst();
+        if (optionalGridValidator.isEmpty()) {
+            throw new IllegalStateException("No eligible GridValidator found for " + gameName);
+        }
+        return optionalGridValidator.get();
     }
 
     private static boolean resolve(GridValidator gridValidator, Board board, Cell cell, DisplayStrategy displayStrategy) {
