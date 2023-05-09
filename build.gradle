@@ -28,6 +28,10 @@ sonar {
     }
 }
 
+test {
+    finalizedBy jacocoTestReport
+}
+
 jacocoTestReport {
     dependsOn test
 
