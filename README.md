@@ -1,3 +1,11 @@
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=ThomasCaud_numeric-puzzle-solver&metric=bugs)](https://sonarcloud.io/summary/new_code?id=ThomasCaud_numeric-puzzle-solver)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=ThomasCaud_numeric-puzzle-solver&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=ThomasCaud_numeric-puzzle-solver)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=ThomasCaud_numeric-puzzle-solver&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=ThomasCaud_numeric-puzzle-solver)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=ThomasCaud_numeric-puzzle-solver&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=ThomasCaud_numeric-puzzle-solver)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ThomasCaud_numeric-puzzle-solver&metric=coverage)](https://sonarcloud.io/summary/new_code?id=ThomasCaud_numeric-puzzle-solver)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=ThomasCaud_numeric-puzzle-solver&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=ThomasCaud_numeric-puzzle-solver)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=ThomasCaud_numeric-puzzle-solver&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=ThomasCaud_numeric-puzzle-solver)
+
 # Solver
 
 - The solver uses backtracking. It is able to solve puzzle games based on rectangular board, where the player has to
