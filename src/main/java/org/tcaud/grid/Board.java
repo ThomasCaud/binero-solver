@@ -2,8 +2,6 @@ package org.tcaud.grid;
 
 import org.tcaud.display.DisplayStrategy;
 
-import static java.lang.Thread.sleep;
-
 public class Board {
     public static final int VALUE_EMPTY_CELL = -1;
     protected int[][] grid;
@@ -33,12 +31,6 @@ public class Board {
     }
 
     public void display(DisplayStrategy displayStrategy) {
-        try {
-            sleep(5L);
-        } catch (Exception exception) {
-            System.err.println(exception.getMessage());
-        }
-
         displayStrategy.display(this);
     }
 }
