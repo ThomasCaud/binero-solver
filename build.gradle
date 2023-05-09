@@ -1,6 +1,7 @@
 plugins {
-    id 'java'
+    id "java"
     id "org.sonarqube" version "3.5.0.2730"
+    id "jacoco"
 }
 
 group = 'org.tcaud'
@@ -11,8 +12,8 @@ repositories {
 }
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation platform("org.junit:junit-bom:5.9.1")
+    testImplementation "org.junit.jupiter:junit-jupiter"
 }
 
 test {
@@ -24,5 +25,11 @@ sonar {
         property "sonar.projectKey", "ThomasCaud_numeric-puzzle-solver"
         property "sonar.organization", "thomascaud-github"
         property "sonar.host.url", "https://sonarcloud.io"
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
     }
 }
